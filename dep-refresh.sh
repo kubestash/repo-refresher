@@ -10,7 +10,7 @@ COMMIT_MSG="Use k8s 1.29 client libs"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
-KUBEDB_API_REF=${KUBEDB_API_REF:-7263b50309d2e37f83f763f0448a4faeac1d5687}
+API_REF=${API_REF:-cc46ddfd674a760d87ec2fe4122f7816296654c8}
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -48,6 +48,7 @@ refresh() {
 
     if [ -f go.mod ]; then
         go mod edit \
+            -require=kubestash.dev/apimachinery@${API_REF} \
             -require=gomodules.xyz/logs@v0.0.7 \
             -require=kubedb.dev/apimachinery@v0.40.0 \
             -require=kubedb.dev/db-client-go@v0.0.8 \
