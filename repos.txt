@@ -1,0 +1,10 @@
+kubestash/CHANGELOG
+kubestash/cli
+kubestash/docs
+kubestash/installer
+kubestash/kubedump
+kubestash/kubestash
+kubestash/manifest
+kubestash/pvc
+kubestash/volume-snapshotter
+kubestash/workload
