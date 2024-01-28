@@ -1,6 +1,4 @@
-kubestash/CHANGELOG
 kubestash/cli
-kubestash/docs
 kubestash/installer
 kubestash/kubedump
 kubestash/kubestash
