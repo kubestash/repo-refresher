@@ -50,9 +50,10 @@ refresh() {
         go mod edit \
             -require=kubestash.dev/apimachinery@${API_REF} \
             -require=gomodules.xyz/logs@v0.0.7 \
-            -require=kubedb.dev/apimachinery@v0.40.0 \
-            -require=kubedb.dev/db-client-go@v0.0.8 \
-            -require=kmodules.xyz/client-go@v0.29.4 \
+            -require=kubedb.dev/apimachinery@v0.41.0-rc.0 \
+            -require=kubedb.dev/db-client-go@v0.0.9 \
+            -require=kmodules.xyz/client-go@v0.29.6 \
+            -require=kmodules.xyz/custom-resources@v0.29.1 \
             -require=kmodules.xyz/resource-metadata@v0.18.1 \
             -require=kmodules.xyz/go-containerregistry@v0.0.12 \
             -require=gomodules.xyz/password-generator@v0.2.9 \
