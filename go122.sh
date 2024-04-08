@@ -42,6 +42,7 @@ refresh() {
     sed -i 's|gcr.io/distroless/static-debian11|gcr.io/distroless/static-debian12|g' Makefile
     sed -i 's|debian:bullseye|debian:bookworm|g' Makefile
     sed -i "s|RESTIC_VER\([[:space:]]*\):= ${OLD_VER}|RESTIC_VER\1:= ${NEW_VER}|g" Makefile
+    sed -i 's|deadline|timeout|g' Makefile
 
     pushd .github/workflows/ && {
         # update GO
