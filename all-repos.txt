@@ -1,0 +1,9 @@
+kubestash/apimachinery
+kubestash/cli
+kubestash/installer
+kubestash/kubedump
+kubestash/kubestash
+kubestash/manifest
+kubestash/pvc
+kubestash/volume-snapshotter
+kubestash/workload
