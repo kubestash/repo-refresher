@@ -4,14 +4,14 @@
 SCRIPT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
-OLD_VER=0.16.4
-NEW_VER=0.17.1
+OLD_VER=0.17.1
+NEW_VER=0.17.3
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
-PR_BRANCH=ctrl2 # -$(date +%s)
+PR_BRANCH=restic_${NEW_VER} # -$(date +%s)
 COMMIT_MSG="Use restic ${NEW_VER}"
 
-REPO_ROOT=/tmp/kubedb-repo-refresher
+REPO_ROOT=/tmp/restic-repo-refresher
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)

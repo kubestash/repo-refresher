@@ -1,3 +1,6 @@
+kubestash/ace-manifest-plugin
+kubestash/addon-template
+kubestash/apimachinery
 kubestash/cli
 kubestash/installer
 kubestash/kubedump
