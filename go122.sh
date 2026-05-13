@@ -5,15 +5,15 @@ SCRIPT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]}")
 
 GITHUB_USER=${GITHUB_USER:-1gtm}
-PR_BRANCH=k134 # -$(date +%s)
-COMMIT_MSG="Use k8s 1.34 client libs"
+PR_BRANCH=restic # -$(date +%s)
+COMMIT_MSG="Use forked kubestash/restic"
 
 REPO_ROOT=/tmp/kubedb-repo-refresher
 
 API_REF=${API_REF:-c5efabadb}
 
-OLD_VER=0.17.3
-NEW_VER=0.18.1
+OLD_VER=0.18.1
+NEW_VER=0.18.1-20260115
 
 repo_uptodate() {
     # gomodfiles=(go.mod go.sum vendor/modules.txt)
@@ -41,8 +41,10 @@ refresh() {
     # sed -i 's/goconst,//g' Makefile
     # sed -i 's|gcr.io/distroless/static-debian11|gcr.io/distroless/static-debian12|g' Makefile
     # sed -i 's|debian:bullseye|debian:bookworm|g' Makefile
-    sed -i "s|RESTIC_VER\([[:space:]]*\):= ${OLD_VER}|RESTIC_VER\1:= ${NEW_VER}|g" Makefile
+    sed -i "s|RESTIC_VER\([[:space:]]*\):= ${OLD_VER}$|RESTIC_VER\1:= ${NEW_VER}|g" Makefile
     # sed -i 's|deadline|timeout|g' Makefile
+    sed -i "s|github.com/kubestash/restic/releases/download/v{RESTIC_VER}/restic_{RESTIC_VER}_{ARG_OS}_{ARG_ARCH}.bz2|github.com/kubestash/restic/releases/download/v{RESTIC_VER}/restic_{ARG_OS}_{ARG_ARCH}.bz2|g" Dockerfile*
+    sed -i "s|github.com/kubestash/restic/releases/download/v{RESTIC_VER}/restic_{RESTIC_VER}_${TARGETOS}_${TARGETARCH}.bz2|github.com/kubestash/restic/releases/download/v{RESTIC_VER}/restic_${TARGETOS}_${TARGETARCH}.bz2|g" Dockerfile*
 
     # pushd .github/workflows/ && {
     #     # update GO
@@ -60,11 +62,13 @@ refresh() {
 
     if [ -f go.mod ]; then
         go mod edit \
-            -require=kubestash.dev/apimachinery@e71904d8 \
+            -require=kubestash.dev/apimachinery@v0.23.0 \
             -require=kmodules.xyz/client-go@v0.34.2 \
             -require=kmodules.xyz/webhook-runtime@v0.34.0 \
-            -require=kmodules.xyz/resource-metadata@v0.40.2 \
+            -require=kmodules.xyz/resource-metadata@v0.41.0 \
             -require=kmodules.xyz/custom-resources@v0.34.0 \
+            -require=kmodules.xyz/go-containerregistry@v0.0.15 \
+            -require=kmodules.xyz/monitoring-agent-api@v0.34.0 \
             -require=gomodules.xyz/password-generator@v0.2.9 \
             -require=go.bytebuilders.dev/license-verifier@v0.14.10 \
             -require=go.bytebuilders.dev/license-verifier/kubernetes@v0.14.10 \
